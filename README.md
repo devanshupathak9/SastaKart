@@ -1,16 +1,60 @@
-# React + Vite
+# 🛒 SastaKart Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**SastaKart** is a React (Vite) based frontend application that enables users to search for products and compare prices across multiple quick-commerce platforms such as Blinkit, Zepto, and Instamart.
 
-Currently, two official plugins are available:
+The application automatically detects the user's location using the browser's Geolocation API, converts coordinates into a human-readable address via OpenStreetMap, and uses this context for searches.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📍 Location Handling Logic
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**On application load:**
+- The app checks cookies for `lat`, `lon`, and `address`
+- If not found, defaults to:
+```json
+{
+    "lat": "28.4646148",
+    "lon": "77.0299194",
+    "address": "Gurgaon, Haryana, India"
+}
+```
 
-## Expanding the ESLint configuration
+**When "Get Location" is clicked:**
+- Browser Geolocation API fetches latitude and longitude
+- Reverse geocoding via OpenStreetMap: `https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}`
+- Address saved to cookies and UI updates immediately
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧱 Tech Stack
+
+- **Frontend:** React + Vite
+- **Styling:** CSS
+- **Location:** Browser Geolocation API
+- **Reverse Geocoding:** OpenStreetMap (Nominatim)
+- **Hosting:** AWS S3 (Static Website Hosting)
+- **CDN:** AWS CloudFront (Planned)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v18+
+- npm
+
+### Installation
+```bash
+npm install
+npm run dev
+```
+
+App available at: `http://localhost:5173`
+
+### Build for Production
+```bash
+npm run build
+```
+
+Generates `dist/` folder with static assets.
+<hr>
